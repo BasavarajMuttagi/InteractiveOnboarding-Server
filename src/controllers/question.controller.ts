@@ -1,4 +1,4 @@
-import { Question } from "../models/schema";
+import { Question, Questionnaire } from "../models/schema";
 import { Request, Response } from "express";
 const createQuestion = async (req: Request, res: Response) => {
   try {
@@ -50,9 +50,14 @@ const deleteQuestion = async (req: Request, res: Response) => {
   try {
     const question = await Question.findByIdAndDelete(req.params.id);
     if (!question) {
-      res.status(404).json({ message: "Question not found" });
-      return;
+      return res.status(404).json({ message: "Question not found" });
     }
+
+    await Questionnaire.updateMany(
+      { questions: req.params.id },
+      { $pull: { questions: req.params.id } },
+    );
+
     res.status(200).json({ message: "Question deleted successfully" });
   } catch (error) {
     res.status(500).json({ error });
