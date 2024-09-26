@@ -41,7 +41,7 @@ const questionSchema = new Schema(
     },
     type: {
       type: String,
-      enum: ["radio", "multiselect", "date"],
+      enum: ["radio", "multiselect", "date", "time", "select"],
       required: true,
     },
     required: {
