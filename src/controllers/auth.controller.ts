@@ -5,7 +5,7 @@ import { sign } from "jsonwebtoken";
 import { SECRET_SALT } from "../..";
 import { UserSignUpType, UserLoginType } from "../zod";
 
-const SignUpUser = async (req: Request, res: Response): Promise<void> => {
+const SignUpUser = async (req: Request, res: Response) => {
   try {
     const { firstname, lastname, email, password } = req.body as UserSignUpType;
     const isUserExists = await User.exists({ email });
@@ -30,7 +30,7 @@ const SignUpUser = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-const LoginUser = async (req: Request, res: Response): Promise<void> => {
+const LoginUser = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body as UserLoginType;
     const UserRecord = await User.findOne({ email });
