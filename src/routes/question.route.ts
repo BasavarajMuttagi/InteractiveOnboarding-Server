@@ -6,12 +6,12 @@ import {
   updateQuestion,
   deleteQuestion,
 } from "../controllers/question.controller";
-const question = express.Router();
+const QuestionRouter = express.Router();
 
-question.post("/", createQuestion);
-question.get("/", getQuestions);
-question.get("/:id", getQuestionById);
-question.put("/:id", updateQuestion);
-question.delete("/:id", deleteQuestion);
+QuestionRouter.post("/", createQuestion);
+QuestionRouter.get("/", getQuestions);
+QuestionRouter.get("/:id", getQuestionById);
+QuestionRouter.put("/:id", updateQuestion);
+QuestionRouter.delete("/:id", deleteQuestion);
 
-export default question;
+export default QuestionRouter;

@@ -50,7 +50,8 @@ const deleteQuestion = async (req: Request, res: Response) => {
   try {
     const question = await Question.findByIdAndDelete(req.params.id);
     if (!question) {
-      return res.status(404).json({ message: "Question not found" });
+      res.status(404).json({ message: "Question not found" });
+      return;
     }
 
     await Questionnaire.updateMany(
