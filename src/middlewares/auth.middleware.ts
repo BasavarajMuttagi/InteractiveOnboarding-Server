@@ -13,7 +13,8 @@ export type tokenType = {
 const validateToken = (req: Request, res: Response, next: NextFunction) => {
   let token = req.headers.authorization;
   if (!token) {
-    return res.status(401).json({ message: "Unauthorized: Token missing" });
+    res.status(401).json({ message: "Unauthorized: Token missing" });
+    return;
   }
 
   token = token.split(" ")[1];
@@ -23,9 +24,8 @@ const validateToken = (req: Request, res: Response, next: NextFunction) => {
     req.body.user = decoded;
     next();
   } catch (err) {
-    return res
-      .status(401)
-      .json({ message: "Unauthorized: Invalid token", err });
+    res.status(401).json({ message: "Unauthorized: Invalid token", err });
+    return;
   }
 };
 

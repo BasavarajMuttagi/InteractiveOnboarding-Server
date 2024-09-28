@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import AuthRouter from "./src/routes/auth.route";
 import { connect } from "mongoose";
+import AttemptRouter from "./src/routes/attempt.route";
 dotenv.config();
 
 const app = express();
@@ -12,6 +13,7 @@ const DATABASE_URL = process.env.DATABASE_URL as string;
 app.use(cors());
 app.use(express.json());
 app.use("/auth", AuthRouter);
+app.use("/attempt", AttemptRouter);
 app.get("/", (req: Request, res: Response) => {
   res.send("Express + TypeScript Server");
 });
